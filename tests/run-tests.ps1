@@ -769,6 +769,24 @@ CheckTrue 'the app icon is cached on disk' ($iconFn -match 'IconDir')
 CheckTrue 'the icon cache lives next to the GUI tmp' ([IO.File]::ReadAllText((Join-Path $LibDir 'gui-state.ps1'), [Text.Encoding]::UTF8) -match 'IconDir')
 CheckTrue 'the window title says which copy runs' ([IO.File]::ReadAllText($GuiPs1, [Text.Encoding]::UTF8) -match '\$window\.Title\s*=\s*"Store-Offline\s+-\s+\$script:Root"')
 
+# ---------------------------------------------------------------- the unpackaged Win32 installer
+# Docker Desktop and its like are not MSIX: the Store only links to the
+# publisher's own installer. That one comes from a CDN, not from FE3, so there is
+# no revision to renew its link with - and the URL the listing hands out is
+# percent-encoded. The first of those two cost a stopped download: StrictMode
+# refused to read a key the job never carried.
+Section 'the unpackaged Win32 installer'
+$cliText = [IO.File]::ReadAllText((Join-Path $ToolDir 'Store-Offline.ps1'), [Text.Encoding]::UTF8)
+$win32Job = @($cliText -split "`n" | Where-Object { $_ -match 'Name = \$name;' }) -join ' '
+CheckTrue 'the Win32 job carries every key a download job reads' ($win32Job -match 'Rev' -and $win32Job -match 'SrcSha1' -and $win32Job -match 'Src')
+$encodedName = [IO.Path]::GetFileName(([Uri]'https://desktop.docker.com/win/main/amd64/242831/Docker Desktop Installer.exe').AbsolutePath)
+Check 'an encoded installer url decodes to a readable name' ([Uri]::UnescapeDataString($encodedName)) 'Docker Desktop Installer.exe'
+CheckTrue 'the installer name is decoded before it is written' ($cliText -match 'UnescapeDataString')
+$jobNoRev = [pscustomobject]@{ Name = 'x' }
+Check 'a job with no revision reads as an empty one' ([string](Get-Prop $jobNoRev 'Rev' '')) ''
+CheckTrue 'Invoke-Download reads the revision through Get-Prop' ($dlFn -match 'Get-Prop \$j')
+CheckTrue 'and the bundle slices read theirs the same way' ($dlFn -match "'SrcSha1'")
+
 Check 'Format-Eta under an hour' (Format-Eta 3492) '58m 12s'
 Check 'Format-Eta just under an hour' (Format-Eta 3599) '59m 59s'
 Check 'Format-Eta hours' (Format-Eta 7080) '1h 58m'

@@ -320,6 +320,10 @@ if ($cat -and $cat.Kind -eq 'win32') {
 
     $name = ''
     try { $name = [IO.Path]::GetFileName(([Uri]$pick.Source).AbsolutePath) } catch { }
+    # the listing hands the installer URL out percent-encoded
+    # ("Docker%20Desktop%20Installer.exe"), and the name on disk has to be the
+    # readable one
+    try { $name = [Uri]::UnescapeDataString($name) } catch { }
     if (-not $name -or $name -notmatch '\.(exe|msi)$') { $name = ('{0}-{1}.exe' -f $safe, $pick.Arch) }
 
     $size = [long]0
@@ -356,7 +360,10 @@ if ($cat -and $cat.Kind -eq 'win32') {
 
     if ($List) { Say "`n(-List: nothing downloaded.)`n" 'Yellow'; exit 0 }
 
-    $jobs = @([pscustomobject]@{ Name = $name; Url = $pick.Url; Range = $false; From = 0; To = 0; Sha1 = $pick.Hash; Size = $size; Arch = $pick.Arch })
+    # this installer comes from the publisher's own CDN, not from FE3, so there is
+    # no revision to renew a link with - but every job carries the same keys, or
+    # StrictMode trips over the missing one the moment the download starts.
+    $jobs = @([pscustomobject]@{ Name = $name; Url = $pick.Url; Range = $false; From = 0; To = 0; Sha1 = $pick.Hash; Size = $size; Arch = $pick.Arch; Rev = ''; SrcSha1 = ''; Src = '' })
     Step 'Downloading ...'
     $got = Invoke-Download -Jobs $jobs -Folder $dest
     $manifest = [pscustomobject]@{

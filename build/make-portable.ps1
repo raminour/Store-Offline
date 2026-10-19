@@ -1,4 +1,4 @@
-# make-portable.ps1 - rebuild E:\idm\Store-Offline.cmd, the whole tool in ONE file.
+# make-portable.ps1 - rebuild Store-Offline.cmd (next to the tool), the whole tool in ONE file.
 #
 #   Store-Offline.cmd  =  batch launcher  +  #STUB#  +  #PAYLOAD#
 #
@@ -7,7 +7,7 @@
 #   #PAYLOAD#  base64 of gzip(json) holding every file of the tool as bytes.
 #
 # Run it after changing anything in the tool:
-#     powershell -NoProfile -ExecutionPolicy Bypass -File E:\idm\build\make-portable.ps1
+#     powershell -NoProfile -ExecutionPolicy Bypass -File <tool>\build\make-portable.ps1
 # The single file is then rewritten, and every byte in it is checked against the
 # files next to it before the script reports success.
 # Add -Sync to also refresh the copy under E:\hermes\hermes-offline in the same

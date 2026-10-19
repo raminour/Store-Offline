@@ -1,0 +1,35 @@
+﻿file      : C:\Users\lenovo\Downloads\Compressed\WhatsApp for Windows 2.2636.100.0\WhatsApp for Windows 2.2636.100.0.Msixbundle
+size      : 355729975
+EOCD      : entries=65535  cdSize=4294967295  cdOff=4294967295
+ZIP64     : locator at 262102, eocd52 at 355729877, merged=True
+effective : entries=16  cdSize=1305  cdOff=355728572
+     1. stored   c=  172767365 u=  172767365 lho=          0 lh=ok       nLen=  37 ex=   0 data=67
+      -> WhatsApp.Root_2.2636.100.0_arm64.msix
+     2. stored   c=     219271 u=     219271 lho=  172767456 lh=ok       nLen=  41 ex=   0 data=172767527
+      -> WhatsApp.Root_2.2636.100.0_scale-100.msix
+     3. stored   c=      68368 u=      68368 lho=  172986822 lh=ok       nLen=  41 ex=   0 data=172986893
+      -> WhatsApp.Root_2.2636.100.0_scale-120.msix
+     4. stored   c=     243203 u=     243203 lho=  173055285 lh=ok       nLen=  41 ex=   0 data=173055356
+      -> WhatsApp.Root_2.2636.100.0_scale-125.msix
+     5. stored   c=     303054 u=     303054 lho=  173298583 lh=ok       nLen=  41 ex=   0 data=173298654
+      -> WhatsApp.Root_2.2636.100.0_scale-150.msix
+     6. stored   c=     223604 u=     223604 lho=  173601732 lh=ok       nLen=  41 ex=   0 data=173601803
+      -> WhatsApp.Root_2.2636.100.0_scale-160.msix
+     7. stored   c=     302397 u=     302397 lho=  173825431 lh=ok       nLen=  41 ex=   0 data=173825502
+      -> WhatsApp.Root_2.2636.100.0_scale-225.msix
+     8. stored   c=     354038 u=     354038 lho=  174127923 lh=ok       nLen=  41 ex=   0 data=174127994
+      -> WhatsApp.Root_2.2636.100.0_scale-250.msix
+     9. stored   c=     411877 u=     411877 lho=  174482056 lh=ok       nLen=  41 ex=   0 data=174482127
+      -> WhatsApp.Root_2.2636.100.0_scale-300.msix
+    10. stored   c=     765043 u=     765043 lho=  174894028 lh=ok       nLen=  41 ex=   0 data=174894099
+      -> WhatsApp.Root_2.2636.100.0_scale-400.msix
+    11. stored   c=     706855 u=     706855 lho=  175659166 lh=ok       nLen=  41 ex=   0 data=175659237
+      -> WhatsApp.Root_2.2636.100.0_scale-500.msix
+    12. stored   c=  179352335 u=  179352335 lho=  176366116 lh=ok       nLen=  35 ex=   0 data=176366181
+      -> WhatsApp.Root_2.2636.100.0_x64.msix
+    13. deflate  c=        789 u=       6623 lho=  355718540 lh=ok       nLen=  35 ex=   0 data=355718605
+    14. deflate  c=        300 u=        422 lho=  355719418 lh=ok       nLen=  16 ex=   0 data=355719464
+    15. deflate  c=        248 u=        469 lho=  355719788 lh=ok       nLen=  19 ex=   0 data=355719837
+    16. deflate  c=       8440 u=      12148 lho=  355720085 lh=ok       nLen=  17 ex=   0 data=355720132
+parsed    : 16 entries;  methods: 8=4 0=12
+sizes     : cSize==uSize: 12   cSize<>uSize: 4   badLocalHeader: 0

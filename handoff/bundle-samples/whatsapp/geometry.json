@@ -1,0 +1,11 @@
+{
+    "cdOffset":  355728572,
+    "note":  "EOCD carries 0xFFFF/0xFFFFFFFF markers; the real values are in the ZIP64 EOCD",
+    "cdSize":  1305,
+    "size":  355729975,
+    "entryCount":  16,
+    "zip64EocdAt":  355729877,
+    "eocdAt":  355729953,
+    "zip64LocatorAt":  355729933,
+    "file":  "C:\\Users\\lenovo\\Downloads\\Compressed\\WhatsApp for Windows 2.2636.100.0\\WhatsApp for Windows 2.2636.100.0.Msixbundle"
+}

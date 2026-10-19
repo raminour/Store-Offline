@@ -420,8 +420,10 @@ function Invoke-Download {
 
         Say ("  [{0}/{1}] {2}   (~{3})" -f $n, $Jobs.Count, $j.Name, (Mb $j.Size)) 'White'
 
+        $jRev = [string](Get-Prop $j 'Rev' '')
+
         if ($j.Range) {
-            Save-UrlRange -Url $j.Url -From $j.From -To $j.To -Dest $target -Label $j.Name -Sha1 $j.SrcSha1 -Rev $j.Rev -Src $j.Src
+            Save-UrlRange -Url $j.Url -From $j.From -To $j.To -Dest $target -Label $j.Name -Sha1 ([string](Get-Prop $j 'SrcSha1' '')) -Rev $jRev -Src ([string](Get-Prop $j 'Src' ''))
             Ok ("extracted the {0} package out of the bundle  ({1})" -f $j.Arch, (Mb (Get-Item -LiteralPath $target).Length))
             $done.Add($j)
             continue
@@ -434,7 +436,7 @@ function Invoke-Download {
             continue
         }
 
-        Save-UrlToFile -Url $j.Url -Dest $target -Sha1 $j.Sha1 -Label $j.Name -Rev $j.Rev
+        Save-UrlToFile -Url $j.Url -Dest $target -Sha1 $j.Sha1 -Label $j.Name -Rev $jRev
 
         if ($j.Sha1) {
             if (-not (Test-Hash $target $j.Sha1)) {

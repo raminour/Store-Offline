@@ -1,14 +1,14 @@
-# Copy the tool from E:\idm to the synced copy under E:\hermes\hermes-offline
+# Copy the tool from its own folder to the synced copy under E:\hermes\hermes-offline
 # and prove afterwards that every file is byte-identical.
 # (The Arabic readme is found by its content, so no non-ASCII literal is needed
 # here - a .ps1 without a BOM is read as ANSI by PowerShell 5.1.)
 $ErrorActionPreference = 'Stop'
-$src = 'E:\idm'
+$src = Split-Path -Parent $PSScriptRoot
 $dst = 'E:\hermes\hermes-offline'
 
 $readme = (Get-ChildItem -LiteralPath $src -Filter '*.txt' -File |
     Where-Object { [IO.File]::ReadAllText($_.FullName, [Text.Encoding]::UTF8) -match '^Store-Offline' })
-if (-not $readme) { throw 'the readme was not found in E:\idm' }
+if (-not $readme) { throw "the readme was not found in $src" }
 $files = @('Store-Offline.ps1', 'Store-Gui.ps1', 'idm.cmd', 'idm-console.cmd', 'Store-Offline.cmd') + $readme.Name
 $dirs = @('lib', 'tests', 'build')
 
